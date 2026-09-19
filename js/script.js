@@ -1,0 +1,157 @@
+// Contact form: create a free form at https://formspree.io (send to aonyadel1@gmail.com),
+// then paste its ID here (the part after /f/ in the form URL). Example: 'xyzabcde'
+var FORMSPREE_ID = 'YOUR_FORM_ID';
+
+(function () {
+  // ----- Icons (24x24 stroke icons, inserted into <svg data-icon="name">) -----
+  var I = {
+    mail: '<path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><polyline points="22,6 12,13 2,6"/>',
+    phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>',
+    pin: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
+    school: '<path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/>',
+    facebook: '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>',
+    linkedin: '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>',
+    instagram: '<rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>',
+    code: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
+    server: '<rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/>',
+    users: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+    book: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
+    layers: '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',
+    chart: '<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>',
+    award: '<circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>',
+    folder: '<path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>',
+    sun: '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>',
+    moon: '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>',
+    menu: '<path d="M3 6h18M3 12h18M3 18h18"/>',
+    close: '<path d="M18 6L6 18M6 6l12 12"/>',
+    globe: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+    github: '<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>',
+    file: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>',
+    grid: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>',
+    monitor: '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>',
+    layout: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>',
+    zap: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+    smartphone: '<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/>',
+    target: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',
+    eye: '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>',
+    download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>'
+  };
+  function icon(el, name) {
+    el.dataset.icon = name;
+    el.setAttribute('viewBox', '0 0 24 24');
+    el.setAttribute('fill', 'none');
+    el.setAttribute('stroke', 'currentColor');
+    el.setAttribute('stroke-width', '2');
+    el.setAttribute('stroke-linecap', 'round');
+    el.setAttribute('stroke-linejoin', 'round');
+    el.setAttribute('aria-hidden', 'true');
+    el.innerHTML = I[name] || '';
+  }
+  document.querySelectorAll('svg[data-icon]').forEach(function (el) { icon(el, el.dataset.icon); });
+
+  // ----- Theme (system preference on first visit, then saved choice) -----
+  var root = document.documentElement;
+  var themeBtn = document.getElementById('theme');
+  function setTheme(t, save) {
+    root.dataset.theme = t;
+    if (save) { try { localStorage.setItem('theme', t); } catch (e) {} }
+    icon(themeBtn.querySelector('svg'), t === 'dark' ? 'sun' : 'moon');
+    themeBtn.setAttribute('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  }
+  setTheme(root.dataset.theme || 'light', false);
+  themeBtn.addEventListener('click', function () {
+    setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark', true);
+  });
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+    var saved = null;
+    try { saved = localStorage.getItem('theme'); } catch (err) {}
+    if (!saved) setTheme(e.matches ? 'dark' : 'light', false);
+  });
+
+  // ----- Mobile menu -----
+  var menuBtn = document.getElementById('menu');
+  var nav = document.getElementById('nav');
+  function toggleMenu(open) {
+    nav.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', open);
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    icon(menuBtn.querySelector('svg'), open ? 'close' : 'menu');
+  }
+  menuBtn.addEventListener('click', function () { toggleMenu(!nav.classList.contains('open')); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') toggleMenu(false); });
+
+  // ----- Contact form (Formspree; falls back to the email app until an ID is set) -----
+  var form = document.getElementById('contact-form');
+  if (form) {
+    var status = document.getElementById('form-status');
+    var btn = form.querySelector('button[type=submit]');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var d = new FormData(form);
+      if (FORMSPREE_ID === 'YOUR_FORM_ID') {
+        location.href = 'mailto:aonyadel1@gmail.com?subject=' + encodeURIComponent('Portfolio message from ' + d.get('name')) +
+          '&body=' + encodeURIComponent('Name: ' + d.get('name') + '\nEmail: ' + d.get('email') + '\n\n' + d.get('message'));
+        status.textContent = 'Opening your email app so you can send the message.';
+        return;
+      }
+      btn.disabled = true;
+      status.textContent = 'Sending...';
+      fetch('https://formspree.io/f/' + FORMSPREE_ID, { method: 'POST', body: d, headers: { Accept: 'application/json' } })
+        .then(function (r) {
+          if (!r.ok) throw new Error('failed');
+          form.reset();
+          status.textContent = 'Thank you! Your message has been sent.';
+        })
+        .catch(function () {
+          status.textContent = 'The message could not be sent. Please email me directly at aonyadel1@gmail.com.';
+        })
+        .then(function () { btn.disabled = false; });
+    });
+  }
+
+  // ----- Typewriter effect (letter by letter; also runs on phones) -----
+  function typeIn(el, speed, delay) {
+    if (!el) return;
+    var text = el.textContent.trim(), n = 0;
+    el.textContent = '';
+    el.classList.add('typing');
+    setTimeout(function next() {
+      el.textContent = text.slice(0, ++n);
+      if (n < text.length) setTimeout(next, speed);
+      else setTimeout(function () { el.classList.remove('typing'); }, 3000);
+    }, delay);
+  }
+  typeIn(document.getElementById('typed'), 110, 500);   // hero name after "Hello, I am"
+  typeIn(document.querySelector('.profile .full'), 70, 500); // name under the photo
+
+  // ----- Project filter -----
+  var fbtns = document.querySelectorAll('.filter');
+  if (fbtns.length) {
+    var cards = document.querySelectorAll('.project');
+    var none = document.getElementById('no-match');
+    fbtns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var f = b.dataset.filter, shown = 0;
+        fbtns.forEach(function (x) {
+          x.classList.toggle('active', x === b);
+          x.setAttribute('aria-pressed', x === b);
+        });
+        cards.forEach(function (c) {
+          var ok = f === 'all' || c.dataset.category.split(' ').indexOf(f) > -1;
+          c.hidden = !ok;
+          if (ok) shown++;
+        });
+        none.hidden = shown > 0;
+      });
+    });
+  }
+
+  // ----- Skill cards: light follows the pointer -----
+  document.querySelectorAll('.skill').forEach(function (card) {
+    card.addEventListener('pointermove', function (e) {
+      var r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+})();

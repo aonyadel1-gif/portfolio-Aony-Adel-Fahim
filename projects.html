@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects | Aony Adel</title>
+<meta name="description" content="Projects by Aony Adel will be added here soon.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>var d=document.documentElement,t=null;try{t=localStorage.getItem('theme')}catch(e){}d.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')</script>
+</head>
+<body>
+<header class="site-header"><div class="container bar">
+<a class="brand" href="index.html">Aony Adel <span>| BIS</span></a>
+<nav id="nav" class="nav" aria-label="Main navigation"><a href="index.html">About</a><a href="goals.html">Goals</a><a href="skills.html">Skills</a><a href="courses.html">Courses</a><a href="projects.html" aria-current="page">Projects</a><a href="contact.html">Contact</a></nav>
+<div class="tools">
+<button class="icon-btn" id="theme" type="button" aria-label="Switch to dark mode"><svg data-icon="moon"></svg></button>
+<button class="icon-btn menu-btn" id="menu" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><svg data-icon="menu"></svg></button>
+</div></div></header>
+<main class="orbs">
+<section class="container page-head">
+<h1>Projects</h1>
+<p class="lead">Things I've built while learning. More projects will be added as I grow.</p>
+</section>
+<section class="container section" style="padding-top:8px">
+<div class="filters" role="group" aria-label="Filter projects">
+<button class="filter active" type="button" data-filter="all" aria-pressed="true">All</button>
+<button class="filter" type="button" data-filter="web" aria-pressed="false">Web Design</button>
+<button class="filter" type="button" data-filter="js" aria-pressed="false">JavaScript Projects</button>
+</div>
+<div class="projects">
+<article class="project" data-category="web js">
+<div class="mock-wrap">
+<div class="mock"><div class="mock-bar"><i></i><i></i><i></i></div>
+<div class="mock-screen"><img src="assets/projects/portfolio-preview.png" alt="Screenshot of the Aony Adel portfolio website" loading="lazy" onerror="this.parentNode.classList.add('no-img')"><span class="ph">Portfolio preview</span></div></div>
+<div class="mock-base"></div>
+</div>
+<h3>Aony Adel - Personal Portfolio</h3>
+<p>A personal website showcasing my skills, experience, and software projects, designed to present my professional identity and facilitate communication with clients and recruiters.</p>
+<div class="chips tech"><span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">JavaScript</span></div>
+<div class="actions">
+<a class="btn btn-primary" href="https://aonyadel1-gif.github.io/portfolio-Aony-Adel-/" target="_blank" rel="noopener noreferrer"><svg data-icon="globe"></svg>Live Demo</a>
+<a class="btn btn-ghost" href="https://github.com/aonyadel1-gif/portfolio-Aony-Adel-" target="_blank" rel="noopener noreferrer"><svg data-icon="github"></svg>Source Code</a>
+</div>
+</article>
+</div>
+<p id="no-match" class="note" hidden>No projects in this category yet.</p>
+</section>
+</main>
+<footer class="site-footer"><div class="container">&copy; 2026 Aony Adel. Business Information Systems student, Assiut, Egypt.</div></footer>
+<script src="js/script.js"></script>
+</body>
+</html>
