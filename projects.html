@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
-<script>var d=document.documentElement,t=null;try{t=localStorage.getItem('theme')}catch(e){}d.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');try{if(!sessionStorage.getItem('intro'))d.classList.add('intro')}catch(e){}</script>
+<script>var d=document.documentElement,t=null;try{t=localStorage.getItem('theme')}catch(e){}d.dataset.theme=t||'dark';try{if(!sessionStorage.getItem('intro'))d.classList.add('intro')}catch(e){}</script>
 </head>
 <body>
 <div class="splash" aria-hidden="true"><div class="splash-in"><div class="splash-logo"><i class="rip"></i><i class="rip r2"></i><span>AA</span></div><p class="splash-name"><span style="--i:0">A</span><span style="--i:1">o</span><span style="--i:2">n</span><span style="--i:3">y</span><span class="sp"></span><span style="--i:5">A</span><span style="--i:6">d</span><span style="--i:7">e</span><span style="--i:8">l</span></p><p class="splash-sub">Business Information Systems Student</p><div class="splash-bar"><i id="bar"></i></div><p class="splash-pct"><b id="pct">0</b>%</p></div><p class="splash-foot">Assiut, Egypt</p></div>
@@ -29,7 +29,6 @@
 <main class="orbs">
 <section class="container page-head">
 <h1>Projects</h1>
-<p class="lead">Things I've built while learning. More projects will be added as I grow.</p>
 </section>
 <section class="container section" style="padding-top:8px">
 <div class="filters" role="group" aria-label="Filter projects">
@@ -45,11 +44,7 @@
 <div class="mock-base"></div>
 </div>
 <h3>Aony Adel - Personal Portfolio</h3>
-<p>A personal website showcasing my skills, experience, and software projects, designed to present my professional identity and facilitate communication with clients and recruiters.</p>
-<dl class="facts">
-<div><dt>The problem</dt><dd>I needed one clear place to present my skills, goals and courses to recruiters and clients.</dd></div>
-<div><dt>My role</dt><dd>Planned the content and structure, designed the interface, and built every page with HTML, CSS and JavaScript.</dd></div>
-</dl>
+<p>A personal website showcasing my skills and projects, built to present my professional identity to clients and recruiters.</p>
 <div class="chips tech"><span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">JavaScript</span></div>
 <div class="actions">
 <a class="btn btn-primary" href="https://aonyadel1-gif.github.io/portfolio-Aony-Adel-Fahim/" target="_blank" rel="noopener noreferrer"><svg data-icon="globe"></svg>Live Demo</a>

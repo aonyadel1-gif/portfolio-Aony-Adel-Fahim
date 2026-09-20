@@ -25,6 +25,15 @@ var FORM_ENDPOINT = 'https://formsubmit.co/ajax/aonyadel1@gmail.com';
     close: '<path d="M18 6L6 18M6 6l12 12"/>',
     globe: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
     github: '<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>',
+    message: '<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>',
+    clock: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+    flag: '<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/>',
+    shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+    briefcase: '<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
+    refresh: '<polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>',
+    trend: '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>',
+    star: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+    check: '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
     file: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>',
     grid: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>',
     monitor: '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>',
@@ -57,14 +66,9 @@ var FORM_ENDPOINT = 'https://formsubmit.co/ajax/aonyadel1@gmail.com';
     icon(themeBtn.querySelector('svg'), t === 'dark' ? 'sun' : 'moon');
     themeBtn.setAttribute('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
   }
-  setTheme(root.dataset.theme || 'light', false);
+  setTheme(root.dataset.theme || 'dark', false);
   themeBtn.addEventListener('click', function () {
     setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark', true);
-  });
-  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
-    var saved = null;
-    try { saved = localStorage.getItem('theme'); } catch (err) {}
-    if (!saved) setTheme(e.matches ? 'dark' : 'light', false);
   });
 
   // ----- Mobile menu -----
@@ -90,11 +94,11 @@ var FORM_ENDPOINT = 'https://formsubmit.co/ajax/aonyadel1@gmail.com';
       if (location.protocol === 'file:') {
         location.href = 'mailto:aonyadel1@gmail.com?subject=' + encodeURIComponent('Portfolio message from ' + d.get('name')) +
           '&body=' + encodeURIComponent('Name: ' + d.get('name') + '\nEmail: ' + d.get('email') + '\n\n' + d.get('message'));
-        status.textContent = 'Opening your email app. The form sends directly once the site is online.';
+        status.textContent = 'جارٍ فتح تطبيق البريد. يعمل النموذج مباشرة بعد نشر الموقع.';
         return;
       }
       btn.disabled = true;
-      status.textContent = 'Sending...';
+      status.textContent = 'جارٍ إرسال رسالتك...';
       fetch(FORM_ENDPOINT, { method: 'POST', body: d, headers: { Accept: 'application/json' } })
         .then(function (r) {
           return r.json().catch(function () { return {}; }).then(function (res) {
@@ -103,10 +107,10 @@ var FORM_ENDPOINT = 'https://formsubmit.co/ajax/aonyadel1@gmail.com';
         })
         .then(function () {
           form.reset();
-          status.textContent = 'Thank you! Your message has been sent.';
+          status.textContent = 'شكراً لك! تم إرسال رسالتك بنجاح، وسأرد عليك في أقرب وقت.';
         })
         .catch(function () {
-          status.textContent = 'The message could not be sent. Please email me directly at aonyadel1@gmail.com.';
+          status.textContent = 'تعذّر إرسال الرسالة. من فضلك راسلني مباشرة على aonyadel1@gmail.com.';
         })
         .then(function () { btn.disabled = false; });
     });
@@ -160,7 +164,7 @@ var FORM_ENDPOINT = 'https://formsubmit.co/ajax/aonyadel1@gmail.com';
         setTimeout(function () { el.classList.remove('reveal', 'in'); el.style.transitionDelay = ''; }, 900);
       });
     }, { threshold: 0.12 });
-    document.querySelectorAll('.card,.skill,.project,.filters,.section>h2').forEach(function (el) {
+    document.querySelectorAll('.card,.skill,.soft-card,.project,.filters,.section>h2').forEach(function (el) {
       el.classList.add('reveal'); io.observe(el);
     });
   }

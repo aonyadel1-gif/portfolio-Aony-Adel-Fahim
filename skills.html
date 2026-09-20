@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
-<script>var d=document.documentElement,t=null;try{t=localStorage.getItem('theme')}catch(e){}d.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');try{if(!sessionStorage.getItem('intro'))d.classList.add('intro')}catch(e){}</script>
+<script>var d=document.documentElement,t=null;try{t=localStorage.getItem('theme')}catch(e){}d.dataset.theme=t||'dark';try{if(!sessionStorage.getItem('intro'))d.classList.add('intro')}catch(e){}</script>
 </head>
 <body>
 <div class="splash" aria-hidden="true"><div class="splash-in"><div class="splash-logo"><i class="rip"></i><i class="rip r2"></i><span>AA</span></div><p class="splash-name"><span style="--i:0">A</span><span style="--i:1">o</span><span style="--i:2">n</span><span style="--i:3">y</span><span class="sp"></span><span style="--i:5">A</span><span style="--i:6">d</span><span style="--i:7">e</span><span style="--i:8">l</span></p><p class="splash-sub">Business Information Systems Student</p><div class="splash-bar"><i id="bar"></i></div><p class="splash-pct"><b id="pct">0</b>%</p></div><p class="splash-foot">Assiut, Egypt</p></div>
@@ -46,15 +46,19 @@
 <li class="skill"><div class="ico"><svg data-icon="monitor"></svg></div><div><span class="name">Microsoft PowerPoint</span></div></li>
 <li class="skill"><div class="ico"><svg data-icon="github"></svg></div><div><span class="name">GitHub Pages</span></div></li>
 </ul></section>
-<section class="container section" style="padding-top:24px"><h2>Currently learning</h2><ul class="skills">
-<li class="skill"><div class="ico"><svg data-icon="book"></svg></div><div><span class="name">React.js</span><small>In progress</small></div></li>
+<section class="container section" style="padding-top:24px"><h2>Libraries</h2><ul class="skills">
+<li class="skill"><div class="ico"><svg data-icon="book"></svg></div><div><span class="name">React.js</span></div></li>
 </ul></section>
 <section class="container section" style="padding-top:24px"><h2>Working skills</h2><ul class="skills">
 <li class="skill"><div class="ico"><svg data-icon="target"></svg></div><div><span class="name">Logical Problem Solving</span></div></li>
 <li class="skill"><div class="ico"><svg data-icon="chart"></svg></div><div><span class="name">Technology-based Presentations</span></div></li>
 </ul></section>
 <section class="container section"><h2>Soft skills</h2>
-<div class="chips"><span class="chip">Communication</span><span class="chip">Teamwork</span><span class="chip">Time Management</span><span class="chip">Responsibility</span><span class="chip">Adaptability</span><span class="chip">Quick Learning</span><span class="chip">Leadership</span><span class="chip">Self-Confidence</span><span class="chip">Professional Behavior</span><span class="chip">Commitment</span></div></section>
+<div class="soft">
+<article class="soft-card" style="--c:var(--c2)"><h3>Interpersonal</h3><ul><li><span class="ico"><svg data-icon="message"></svg></span>Communication</li><li><span class="ico"><svg data-icon="users"></svg></span>Teamwork</li><li><span class="ico"><svg data-icon="flag"></svg></span>Leadership</li></ul></article>
+<article class="soft-card" style="--c:var(--c3)"><h3>Work ethic</h3><ul><li><span class="ico"><svg data-icon="shield"></svg></span>Responsibility</li><li><span class="ico"><svg data-icon="check"></svg></span>Commitment</li><li><span class="ico"><svg data-icon="clock"></svg></span>Time Management</li><li><span class="ico"><svg data-icon="briefcase"></svg></span>Professional Behavior</li></ul></article>
+<article class="soft-card" style="--c:var(--c4)"><h3>Personal growth</h3><ul><li><span class="ico"><svg data-icon="refresh"></svg></span>Adaptability</li><li><span class="ico"><svg data-icon="trend"></svg></span>Quick Learning</li><li><span class="ico"><svg data-icon="star"></svg></span>Self-Confidence</li></ul></article>
+</div></section>
 </main>
 <footer class="site-footer"><div class="container">&copy; 2026 Aony Adel. Business Information Systems student, Assiut, Egypt.</div></footer>
 <script src="js/script.js"></script>
