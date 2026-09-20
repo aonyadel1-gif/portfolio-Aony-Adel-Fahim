@@ -1,6 +1,5 @@
-// Contact form: create a free form at https://formspree.io (send to aonyadel1@gmail.com),
-// then paste its ID here (the part after /f/ in the form URL). Example: 'xyzabcde'
-var FORMSPREE_ID = 'YOUR_FORM_ID';
+// Contact form endpoint (FormSubmit.co: free, no account. The first message asks you to confirm your email once).
+var FORM_ENDPOINT = 'https://formsubmit.co/ajax/aonyadel1@gmail.com';
 
 (function () {
   // ----- Icons (24x24 stroke icons, inserted into <svg data-icon="name">) -----
@@ -80,7 +79,7 @@ var FORMSPREE_ID = 'YOUR_FORM_ID';
   menuBtn.addEventListener('click', function () { toggleMenu(!nav.classList.contains('open')); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') toggleMenu(false); });
 
-  // ----- Contact form (Formspree; falls back to the email app until an ID is set) -----
+  // ----- Contact form (FormSubmit; falls back to the email app when opened from a local file) -----
   var form = document.getElementById('contact-form');
   if (form) {
     var status = document.getElementById('form-status');
@@ -88,17 +87,21 @@ var FORMSPREE_ID = 'YOUR_FORM_ID';
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var d = new FormData(form);
-      if (FORMSPREE_ID === 'YOUR_FORM_ID') {
+      if (location.protocol === 'file:') {
         location.href = 'mailto:aonyadel1@gmail.com?subject=' + encodeURIComponent('Portfolio message from ' + d.get('name')) +
           '&body=' + encodeURIComponent('Name: ' + d.get('name') + '\nEmail: ' + d.get('email') + '\n\n' + d.get('message'));
-        status.textContent = 'Opening your email app so you can send the message.';
+        status.textContent = 'Opening your email app. The form sends directly once the site is online.';
         return;
       }
       btn.disabled = true;
       status.textContent = 'Sending...';
-      fetch('https://formspree.io/f/' + FORMSPREE_ID, { method: 'POST', body: d, headers: { Accept: 'application/json' } })
+      fetch(FORM_ENDPOINT, { method: 'POST', body: d, headers: { Accept: 'application/json' } })
         .then(function (r) {
-          if (!r.ok) throw new Error('failed');
+          return r.json().catch(function () { return {}; }).then(function (res) {
+            if (!r.ok || res.success === 'false' || res.success === false) throw new Error('failed');
+          });
+        })
+        .then(function () {
           form.reset();
           status.textContent = 'Thank you! Your message has been sent.';
         })
@@ -121,7 +124,6 @@ var FORMSPREE_ID = 'YOUR_FORM_ID';
       else setTimeout(function () { el.classList.remove('typing'); }, 3000);
     }, delay);
   }
-  typeIn(document.getElementById('typed'), 110, 500);   // hero name after "Hello, I am"
   typeIn(document.querySelector('.profile .full'), 70, 500); // name under the photo
 
   // ----- Project filter -----
@@ -145,6 +147,74 @@ var FORMSPREE_ID = 'YOUR_FORM_ID';
       });
     });
   }
+
+  // ----- Scroll reveal -----
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en, i) {
+        if (!en.isIntersecting) return;
+        var el = en.target;
+        el.style.transitionDelay = (i % 4) * 80 + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+        setTimeout(function () { el.classList.remove('reveal', 'in'); el.style.transitionDelay = ''; }, 900);
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.card,.skill,.project,.filters,.section>h2').forEach(function (el) {
+      el.classList.add('reveal'); io.observe(el);
+    });
+  }
+
+  // ----- Intro splash (first page of each visit, about 5 seconds; click to skip) -----
+  if (root.classList.contains('intro')) {
+    var pct = document.getElementById('pct'), bar = document.getElementById('bar');
+    var sub = document.querySelector('.splash-sub'), splash = document.querySelector('.splash');
+    var words = ['Business Information Systems Student', 'Front-End & Back-End', 'Full Stack Developer'];
+    var cur = 0, t0 = null, DUR = 4400, done = false;
+    var finish = function () {
+      if (done) return;
+      done = true;
+      root.classList.add('intro-out');
+      try { sessionStorage.setItem('intro', '1'); } catch (e) {}
+      setTimeout(function () { root.classList.remove('intro', 'intro-out'); }, 1100);
+    };
+    requestAnimationFrame(function tick(t) {
+      if (!t0) t0 = t;
+      var p = Math.min((t - t0) / DUR, 1);
+      pct.textContent = Math.round(p * 100);
+      bar.style.transform = 'translateX(' + (p * 100 - 100) + '%)';
+      var i = p < 0.34 ? 0 : p < 0.67 ? 1 : 2;
+      if (i !== cur) {
+        cur = i;
+        sub.textContent = words[i];
+        sub.style.animation = 'none';
+        void sub.offsetWidth;
+        sub.style.animation = 'swapin .5s both';
+      }
+      if (p < 1) requestAnimationFrame(tick); else setTimeout(finish, 400);
+    });
+    setTimeout(finish, DUR + 2500);
+    splash.addEventListener('click', finish);
+  }
+
+  // ----- Count-up numbers -----
+  document.querySelectorAll('[data-count]').forEach(function (el) {
+    if (!('IntersectionObserver' in window)) return;
+    var end = +el.dataset.count;
+    var o = new IntersectionObserver(function (en) {
+      if (!en[0].isIntersecting) return;
+      o.disconnect();
+      var t0 = null;
+      el.textContent = '0';
+      requestAnimationFrame(function step(t) {
+        if (!t0) t0 = t;
+        var p = Math.min((t - t0) / 1200, 1);
+        el.textContent = Math.round(end * p);
+        if (p < 1) requestAnimationFrame(step);
+      });
+    });
+    o.observe(el);
+  });
 
   // ----- Skill cards: light follows the pointer -----
   document.querySelectorAll('.skill').forEach(function (card) {

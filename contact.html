@@ -5,12 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Contact | Aony Adel</title>
 <meta name="description" content="Contact Aony Adel by email, phone or social media.">
+<meta name="theme-color" content="#0b1b3a">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://aonyadel1-gif.github.io/portfolio-Aony-Adel-/contact.html">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Aony Adel">
+<meta property="og:title" content="Contact | Aony Adel"><meta property="og:description" content="Contact Aony Adel by email, phone or social media.">
+<meta property="og:url" content="https://aonyadel1-gif.github.io/portfolio-Aony-Adel-/contact.html"><meta property="og:image" content="https://aonyadel1-gif.github.io/portfolio-Aony-Adel-/assets/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
-<script>var d=document.documentElement,t=null;try{t=localStorage.getItem('theme')}catch(e){}d.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')</script>
+<script>var d=document.documentElement,t=null;try{t=localStorage.getItem('theme')}catch(e){}d.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');try{if(!sessionStorage.getItem('intro'))d.classList.add('intro')}catch(e){}</script>
 </head>
 <body>
+<div class="splash" aria-hidden="true"><div class="splash-in"><div class="splash-logo"><i class="rip"></i><i class="rip r2"></i><span>AA</span></div><p class="splash-name"><span style="--i:0">A</span><span style="--i:1">o</span><span style="--i:2">n</span><span style="--i:3">y</span><span class="sp"></span><span style="--i:5">A</span><span style="--i:6">d</span><span style="--i:7">e</span><span style="--i:8">l</span></p><p class="splash-sub">Business Information Systems Student</p><div class="splash-bar"><i id="bar"></i></div><p class="splash-pct"><b id="pct">0</b>%</p></div><p class="splash-foot">Assiut, Egypt</p></div>
 <header class="site-header"><div class="container bar">
 <a class="brand" href="index.html">Aony Adel <span>| BIS</span></a>
 <nav id="nav" class="nav" aria-label="Main navigation"><a href="index.html">About</a><a href="goals.html">Goals</a><a href="skills.html">Skills</a><a href="courses.html">Courses</a><a href="projects.html">Projects</a><a href="contact.html" aria-current="page">Contact</a></nav>
@@ -21,7 +29,6 @@
 <main>
 <section class="container page-head">
 <h1>Get in touch</h1>
-<p class="lead">Questions, ideas, or just want to say hello? Send me a message.</p>
 </section>
 <section class="container section contact" style="padding-top:16px">
 <div class="card">
@@ -40,7 +47,7 @@
 <label for="name">Name</label><input id="name" name="name" type="text" autocomplete="name" required>
 <label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required>
 <label for="message">Message</label><textarea id="message" name="message" required></textarea>
-<input type="hidden" name="_subject" value="New message from your portfolio"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+<input type="hidden" name="_captcha" value="false"><input type="hidden" name="_template" value="table"><input type="hidden" name="_subject" value="New message from your portfolio"><input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
 <button class="btn btn-primary" type="submit">Send Message</button>
 <p id="form-status" role="status" aria-live="polite"></p>
 </form>
