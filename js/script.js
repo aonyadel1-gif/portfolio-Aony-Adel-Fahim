@@ -149,7 +149,7 @@ var FORM_ENDPOINT = 'https://formsubmit.co/ajax/aonyadel1@gmail.com';
   }
 
   // ----- Scroll reveal -----
-  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en, i) {
         if (!en.isIntersecting) return;
@@ -215,6 +215,17 @@ var FORM_ENDPOINT = 'https://formsubmit.co/ajax/aonyadel1@gmail.com';
     });
     o.observe(el);
   });
+
+  // ----- Scroll progress bar -----
+  var pbar = document.createElement('div');
+  pbar.className = 'progress';
+  document.body.appendChild(pbar);
+  function prog() {
+    var h = document.documentElement.scrollHeight - innerHeight;
+    pbar.style.transform = 'scaleX(' + (h > 0 ? Math.min(scrollY / h, 1) : 0) + ')';
+  }
+  addEventListener('scroll', prog, { passive: true });
+  prog();
 
   // ----- Skill cards: light follows the pointer -----
   document.querySelectorAll('.skill').forEach(function (card) {
